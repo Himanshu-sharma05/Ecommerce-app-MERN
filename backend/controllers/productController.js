@@ -30,8 +30,8 @@ const addProduct = async (req, res) => {
             date: Date.now()
         }
 
-        conosle.log(productData);
-        const product = new productModel(productdate);
+        console.log(productData);
+        const product = new productModel(productData);
         await product.save();
 
         res.json({success:true,message:"Product Added"})
@@ -44,19 +44,41 @@ const addProduct = async (req, res) => {
 
 
 //function for listing product
-const listProducts = (req, res) => {
-
+const listProducts = async (req, res) => {
+    try {
+        const products = await productModel.find({});
+        res.json({success:true,products})
+    } catch (error) {
+        console.log(error)
+        res.json({success: false , message: error.message })
+        
+    }
 }
 
 //function to remove product
-const removeProduct = (req, res) => {
+const removeProduct = async (req, res) => {
+    try {
+        await productModel.findByIdAndDelete(req.body.id)
+        res.json({success:true,message:"Product Removed"});
 
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:error.message});
+    }
 }
 
 
 //funciton for single product info
-const singleProduct = (req, res) => {
-
+const singleProduct = async (req, res) => {
+    try {
+        const productId  = req.body.productId;
+        const product = await productModel.findById(productId);
+        console.log(product);
+        res.json({success:true,product});
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,error:error.message});
+    }
 }
 
 export {listProducts,addProduct,removeProduct,singleProduct}
