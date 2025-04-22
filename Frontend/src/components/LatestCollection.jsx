@@ -9,7 +9,7 @@ const LatestCollection = () => {
 
     useEffect(()=>{
         setlatestProducts(products.slice(0,10));
-    },[])
+    },[products]);
 
   return (
     <div className='text-center py-8 text-3xl'>
