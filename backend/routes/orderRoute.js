@@ -6,7 +6,7 @@ const orderRotuer = express.Router();
 
 //admin Features
 orderRotuer.post('/list',adminAuth,allOrders);
-orderRotuer.post('/status',adminAuth,allOrders);
+orderRotuer.post('/status',adminAuth,updateStatus);
 
 
 //Payment Features

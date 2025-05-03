@@ -65,6 +65,13 @@ const PlaceOrder = () => {
           }
           break;
 
+        case 'stripe':
+          const responseStripe = await axios.post(backendUrl + '/api/order/stripe',orderData,{headers:{token}})
+          if(responseStripe.data.success){
+            
+          }
+          break;
+
         default:
           break;
       }
